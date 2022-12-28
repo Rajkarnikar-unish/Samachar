@@ -1,0 +1,1 @@
+This is a kotlin android project implementing Coroutines and Retrofit with public api displaying news.
