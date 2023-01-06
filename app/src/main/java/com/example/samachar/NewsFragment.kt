@@ -16,20 +16,7 @@ import androidx.recyclerview.widget.RecyclerView.Recycler
 import retrofit2.HttpException
 import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NewsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NewsFragment : Fragment(R.layout.fragment_news) {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class NewsFragment : Fragment(R.layout.fragment_news), TitleClickListener {
 
     private lateinit var newsAdapter : NewsAdapter
     private lateinit var newsRecyclerView : RecyclerView
@@ -41,7 +28,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         newsRecyclerView = view.findViewById(R.id.newsListRV)
         newsRecyclerView.layoutManager = layoutManager
 
-        newsAdapter = NewsAdapter()
+        newsAdapter = NewsAdapter(this)
 
         newsRecyclerView.adapter = newsAdapter
 
@@ -62,8 +49,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
                 return@launchWhenCreated
             }
 
-//            Log.i(TAG, "API REQUEST: --->" + response.body()!!)
-
             if(response.isSuccessful && response.body() != null) {
                 newsAdapter.news = response.body()!!.results
                 Log.d(TAG, "API RESPONSE ===> \n ${response.body()!!.results}")
@@ -73,50 +58,25 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
             progressBar.isVisible = false
         }
-
-//        val subjectFragment = SubjectFragment()
-//
-//        var titleTextView = view.findViewById<TextView>(R.id.tvTitle)
-////            var fragment = parentFragmentManager?.beginTransaction()
-////            fragment?.replace(R.id.newsFrameLayout, subjectFragment)
-////            fragment?.commit()
-//
-//        println(titleTextView.text)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    override fun onClick(result: Result) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.newsFrameLayout, SubjectFragment(result))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_news, container, false)
 
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        newsRecyclerView = view.findViewById(R.id.newsListRV)
+        newsRecyclerView.adapter = NewsAdapter(this)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NewsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
