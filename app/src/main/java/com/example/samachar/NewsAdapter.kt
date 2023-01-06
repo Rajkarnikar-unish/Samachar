@@ -1,13 +1,16 @@
 package com.example.samachar
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samachar.databinding.NewsItemBinding
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     inner class NewsViewHolder(val binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -37,13 +40,24 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         ))
     }
 
+    val subjectFragment = SubjectFragment()
+
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.binding.apply {
             val news = news[position]
+
+            tvTitle.setOnClickListener {
+                val activity = it.context as AppCompatActivity
+                activity.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.newsFrameLayout, subjectFragment)
+                    .commit()
+            }
+
             tvTitle.text = news.title
             tvCategory.text = news.category[0]
-            tvPublishedDate.text = news.pubDate
+            tvDescription.text = news.description
+            tvPublishedDate.text = news.pubDate.substring(0, 10)
         }
     }
-
 }
