@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.samachar.Result
 
@@ -32,6 +33,13 @@ class SubjectFragment(
         content.text = result.content ?: result.description
         publishedDate.text = result.pubDate?.subSequence(0, 10)
 
+        println(result.image_url)
+
+        if (result.image_url == null) {
+            thumbnailImage.visibility = View.GONE
+        } else {
+            Glide.with(this).load(result.image_url.toString()).into(thumbnailImage)
+        }
     }
 
     override fun onCreateView(

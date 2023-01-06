@@ -17,15 +17,9 @@ const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
-    private lateinit var newsAdapter: NewsAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
 
         val newsFragment = NewsFragment()
 
@@ -33,15 +27,5 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.newsFrameLayout, newsFragment)
             commit()
         }
-
-//        setupRecyclerView()
-
-
     }
-
-//    private fun setupRecyclerView() = binding.newsListRecylerView.apply {
-//        newsAdapter = NewsAdapter()
-//        adapter = newsAdapter
-//        layoutManager = LinearLayoutManager(this@MainActivity)
-//    }
 }
