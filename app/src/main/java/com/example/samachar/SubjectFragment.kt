@@ -1,15 +1,12 @@
 package com.example.samachar
 
-import android.graphics.BitmapFactory
-import android.media.Image
-import android.net.Uri
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.samachar.Result
 
@@ -17,17 +14,23 @@ class SubjectFragment(
     private val result: Result,
 ) : Fragment(R.layout.fragment_subject) {
 
+    private lateinit var toolbar : androidx.appcompat.widget.Toolbar
+
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+//        (requireActivity() as AppCompatActivity).supportActionBar?.setShowHideAnimationEnabled(false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var subjectTitle = view.findViewById<TextView>(R.id.subjectTitle)
-        var content = view.findViewById<TextView>(R.id.contentTextView)
-        var publishedDate = view.findViewById<TextView>(R.id.publishedDateTextView)
-        var thumbnailImage = view.findViewById<ImageView>(R.id.thumbnailImageView)
+        val subjectTitle = view.findViewById<TextView>(R.id.subjectTitle)
+        val content = view.findViewById<TextView>(R.id.contentTextView)
+        val publishedDate = view.findViewById<TextView>(R.id.publishedDateTextView)
+        val thumbnailImage = view.findViewById<ImageView>(R.id.thumbnailImageView)
 
         subjectTitle.text = result.title
         content.text = result.content ?: result.description
@@ -46,7 +49,18 @@ class SubjectFragment(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+//        toolbar = view.findViewById(R.id.subjectToolbar)
+//
+//        toolbar.setNavigationIcon(R.drawable.ic_back)
+//
+//        toolbar.setNavigationOnClickListener { view ->
+//            activity?.supportFragmentManager?.beginTransaction()
+//                ?.replace(R.id.newsFrameLayout, NewsFragment())
+//                ?.commit()
+//        }
+
+
         return inflater.inflate(R.layout.fragment_subject, container, false)
     }
 }
