@@ -5,11 +5,13 @@
     android:id="@+id/newsItem"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:padding="8dp">
 
     <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/teal_200"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -18,15 +20,15 @@
             <ImageView
                 android:id="@+id/newsThumbnail"
                 android:layout_width="175dp"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:src="@drawable/image2"
                 android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/newsTitle"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="@string/title_eg"
                 android:layout_below="@+id/newsThumbnail"
                 android:ellipsize="end"

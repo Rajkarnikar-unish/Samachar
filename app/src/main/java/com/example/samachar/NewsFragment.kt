@@ -60,16 +60,15 @@ class NewsFragment : Fragment() {
 
                 val news = response.body()!!.results
 
-                newsAdapter = NewsAdapter(news)
+                newsAdapter = NewsAdapter(news, this@NewsFragment)
                 binding.newsListRV.adapter = newsAdapter
 
-                Log.d(TAG, "API RESPONSE ===> \n ${response.body()!!.results}")
+//                Log.d(TAG, "API RESPONSE ===> \n ${response.body()!!.results}")
             } else {
                 Log.e(TAG, "Response not successful!")
             }
 
             binding.progressBar.isVisible = false
         }
-
     }
 }
