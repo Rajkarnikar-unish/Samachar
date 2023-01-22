@@ -44,9 +44,10 @@ class NewsAdapter(
             }
         }
         holder.binding.root.setOnClickListener {
-            Log.i(TAG, "THIS IS TEST CLICK: ${news.title}")
+
 
             val action = NewsFragmentDirections.actionSelectNews()
+            action.result = news
             Navigation.findNavController(it).navigate(action)
         }
     }

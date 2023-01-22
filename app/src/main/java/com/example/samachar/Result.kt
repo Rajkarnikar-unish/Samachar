@@ -14,4 +14,4 @@ data class Result(
     val source_id: String?,
     val title: String?,
     val video_url: Any?
-)
+) : java.io.Serializable

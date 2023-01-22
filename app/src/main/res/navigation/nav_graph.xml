@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.samachar.NewsFragment"
-        android:label="fragment_news"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_news" >
         <action
             android:id="@+id/actionSelectNews"
@@ -17,6 +17,12 @@
     <fragment
         android:id="@+id/subjectFragment"
         android:name="com.example.samachar.SubjectFragment"
-        android:label="fragment_subject"
-        tools:layout="@layout/fragment_subject" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_subject" >
+        <argument
+            app:argType="com.example.samachar.Result"
+            android:name="Result"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

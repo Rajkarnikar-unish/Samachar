@@ -13,7 +13,9 @@ import com.example.samachar.databinding.FragmentSubjectBinding
 
 class SubjectFragment(
 //    private val result: Result,
-) : Fragment(R.layout.fragment_subject) {
+) : Fragment() {
+
+    private var result: Result? = null
 
     private lateinit var toolbar : androidx.appcompat.widget.Toolbar
 
@@ -29,6 +31,18 @@ class SubjectFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            result = SubjectFragmentArgs.fromBundle(it).result
+
+            binding.subjectTitle.text = result?.title
+            binding.contentTextView.text = result?.description
+            binding.publishedDateTV.text = result?.pubDate
+        }
+
+        binding.btnBookmark.setOnClickListener {
+            binding.btnBookmark.setImageResource(R.drawable.ic_bookmark)
+        }
 
 //        val subjectTitle = view.findViewById<TextView>(R.id.subjectTitle)
 //        val content = view.findViewById<TextView>(R.id.contentTextView)
