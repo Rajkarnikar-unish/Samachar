@@ -13,5 +13,6 @@ data class Result(
     val pubDate: String?,
     val source_id: String?,
     val title: String?,
-    val video_url: Any?
+    val video_url: Any?,
+    val isBookmarked: Boolean? = false
 ) : java.io.Serializable
